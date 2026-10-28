@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#030816">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Система">
+<title>body system</title>
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:dark;--bg:#030816;--c:#4aa8ff;--c2:#a9defc;--t:#e8f4ff;--m:#7f9bbd;--ok:#38e08c;--gold:#ffc14d;--red:#ff4d6a;--pur:#b06bff}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;min-height:100%;background:var(--bg);color:var(--t);font-family:Orbitron,"Segoe UI",system-ui,sans-serif}
+body{background:radial-gradient(ellipse at 50% -10%,#123a70 0,transparent 60%),radial-gradient(ellipse at 50% 110%,#0b2a52 0,transparent 55%),var(--bg);background-attachment:fixed;padding-bottom:env(safe-area-inset-bottom,0px)}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;background:repeating-linear-gradient(transparent 0 3px,#4aa8ff0a 3px 4px);z-index:1}
+#app{max-width:520px;margin:0 auto;padding:14px 14px 110px;position:relative;z-index:2}
+.hd{width:max-content;max-width:100%;margin:6px auto 16px;padding:7px 26px;border:1.5px solid var(--c2);background:#0a1c3acc;text-align:center;font-size:20px;font-weight:900;letter-spacing:6px;color:#fff;text-shadow:0 0 12px var(--c);box-shadow:0 0 16px #4aa8ff77,inset 0 0 12px #4aa8ff33}
+.pn{position:relative;border:1.5px solid var(--c);padding:14px;margin-bottom:14px;background:linear-gradient(#0a1b36d9,#061226d9);box-shadow:0 0 18px #4aa8ff55,inset 0 0 24px #4aa8ff22}
+.pn::before,.pn::after{content:"";position:absolute;width:14px;height:14px;border:3px solid var(--c2)}
+.pn::before{top:-3px;left:-3px;border-right:0;border-bottom:0}.pn::after{bottom:-3px;right:-3px;border-left:0;border-top:0}
+.pn.g{border-color:var(--gold);box-shadow:0 0 18px #ffc14d55,inset 0 0 24px #ffc14d22}.pn.g::before,.pn.g::after{border-color:var(--gold)}
+.pn.r{border-color:var(--red);box-shadow:0 0 18px #ff4d6a55,inset 0 0 24px #ff4d6a22}.pn.r::before,.pn.r::after{border-color:var(--red)}
+.pn.p{border-color:var(--pur);box-shadow:0 0 18px #b06bff55,inset 0 0 24px #b06bff22}.pn.p::before,.pn.p::after{border-color:var(--pur)}
+.top{display:flex;align-items:center;gap:14px}
+.lv{font-size:58px;font-weight:900;line-height:1;color:#fff;text-shadow:0 0 16px var(--c)}
+.lv small{display:block;font-size:11px;letter-spacing:3px;color:var(--c2);text-shadow:none}
+.who{flex:1;font-size:12px;line-height:1.9;color:var(--m);letter-spacing:1px}.who b{color:#fff;font-weight:700}
+.rank{display:inline-block;padding:0 8px;border:1px solid var(--gold);color:var(--gold);border-radius:3px;font-weight:700}
+.bar{margin:11px 0 2px}
+.bar .l{display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--c2);letter-spacing:1px;margin-bottom:4px;gap:8px}
+.bt{height:11px;border:1px solid var(--c);background:#06101f;overflow:hidden}
+.bt i{display:block;height:100%;width:0;background:linear-gradient(90deg,#1c6dd0,#6fd0ff);box-shadow:0 0 10px var(--c);transition:width .8s ease}
+.bt.hp i{background:linear-gradient(90deg,#c0213f,#ff6b86)}.bt.mp i{background:linear-gradient(90deg,#2a56d6,#7aa2ff)}.bt.ft i{background:linear-gradient(90deg,#c88a1a,#ffd36b)}.bt.kc i{background:linear-gradient(90deg,#1fae6b,#7dffbf)}.bt.pr i{background:linear-gradient(90deg,#7b2fbe,#c58bff)}.bt.fa i{background:linear-gradient(90deg,#a05a1a,#ffb067)}.bt.ca i{background:linear-gradient(90deg,#1fae6b,#9dffcf)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:4px 16px}
+.stat{display:flex;align-items:center;justify-content:space-between;padding:9px 4px;border-bottom:1px solid #4aa8ff33;font-size:14px}
+.stat span{color:var(--c2);letter-spacing:1px}.stat em{display:block;font-style:normal;font-size:9px;color:var(--m)}
+.stat b{font-size:18px;text-shadow:0 0 8px var(--c)}
+.pl{width:28px;height:28px;margin-left:8px;border:1px solid var(--ok);background:#38e08c22;color:var(--ok);font:700 18px/1 Orbitron,sans-serif;cursor:pointer;animation:pu 1.4s infinite}
+@keyframes pu{50%{box-shadow:0 0 12px var(--ok)}}
+.pts{text-align:center;margin:12px 0 4px;font-size:12px;letter-spacing:1px;color:var(--gold);line-height:1.6}
+.pts.m{color:var(--m)}
+.q{display:flex;align-items:center;gap:12px;padding:11px 2px;border-bottom:1px solid #4aa8ff33}
+.q:last-child{border:0}
+.q .ck{flex:none;width:30px;height:30px;border:2px solid var(--c);background:transparent;color:transparent;font:900 18px/1 sans-serif;cursor:pointer;transition:.3s}
+.q.d .ck{background:var(--ok);border-color:var(--ok);color:#04210f;box-shadow:0 0 12px var(--ok)}
+.q .tx{flex:1;font-size:13px;line-height:1.4;letter-spacing:.5px}.q .tx small{display:block;color:var(--m);font-size:10px;margin-top:2px}
+.q.d .tx{color:var(--m)}
+.rm{background:none;border:0;color:var(--red);font-size:20px;cursor:pointer}
+.sub{font-size:11px;letter-spacing:3px;color:var(--c2);margin:14px 0 2px}
+.sub:first-child{margin-top:0}
+.cau{font:13px/1.5 "Segoe UI",system-ui,sans-serif;color:var(--red);text-align:center;padding:4px}
+.add{display:flex;gap:8px;margin-top:10px}
+.add input,.add select,.sel{flex:1;min-width:0;background:#06101f;border:1px solid var(--c);color:var(--t);padding:10px;font:14px "Segoe UI",system-ui,sans-serif;border-radius:0}
+.btn{border:1px solid var(--c);background:#4aa8ff22;color:#fff;padding:11px 14px;font:700 11px Orbitron,sans-serif;letter-spacing:1px;cursor:pointer;text-align:center;display:block;text-decoration:none}
+.btn:active{transform:scale(.97)}.btn.w{width:100%;margin-top:10px;padding:15px;font-size:13px}
+.btn.gb{border-color:var(--gold);background:#ffc14d22;color:var(--gold)}.btn.ok{border-color:var(--ok);background:#38e08c22;color:var(--ok)}.btn.pb{border-color:var(--pur);background:#b06bff22;color:var(--pur)}.btn.rd{border-color:var(--red);background:#ff4d6a22;color:var(--red)}
+.btn[disabled]{opacity:.45;pointer-events:none}
+.h2{font-size:11px;letter-spacing:3px;color:var(--c2);margin:0 0 6px}.pn.g .h2{color:var(--gold)}.pn.p .h2{color:var(--pur)}
+.ttl{font:15px/1.5 "Segoe UI",system-ui,sans-serif;color:var(--c2);margin-bottom:6px}
+.wt{font-size:19px;font-weight:700;margin:4px 0;color:#fff}.wd{color:var(--m);font:14px "Segoe UI",system-ui,sans-serif;margin-bottom:10px}
+.dots{display:flex;gap:8px;margin:12px 0}.dots i{flex:1;height:10px;border:1px solid var(--gold)}.dots i.on{background:var(--gold);box-shadow:0 0 10px var(--gold)}
+.ml{display:flex;justify-content:space-between;gap:10px;padding:9px 0;border-bottom:1px solid #4aa8ff33;font:14px "Segoe UI",system-ui,sans-serif;align-items:center}
+.ml b{color:var(--ok);white-space:nowrap}.ml small{color:var(--m)}
+.pv{width:100%;max-height:200px;object-fit:cover;border:1px solid var(--c);margin-bottom:8px}
+.nt{font:12px/1.5 "Segoe UI",system-ui,sans-serif;color:var(--m);margin-top:8px;text-align:center}
+.rst{display:block;margin:8px auto 0;background:none;border:0;color:var(--m);font:10px Orbitron,sans-serif;letter-spacing:1px;cursor:pointer;padding:10px}
+nav{position:fixed;left:0;right:0;bottom:0;z-index:5;display:flex;justify-content:center;gap:4px;padding:10px 6px calc(10px + env(safe-area-inset-bottom,0px));background:linear-gradient(transparent,#030816 40%)}
+nav button{flex:1;max-width:100px;padding:13px 2px;border:1px solid #4aa8ff66;background:#071428;color:var(--m);font:700 9px Orbitron,sans-serif;letter-spacing:.5px;cursor:pointer}
+nav button.on{color:#fff;border-color:var(--c2);box-shadow:0 0 14px var(--c);background:#0f2c58}
+#toast{position:fixed;left:50%;top:calc(12px + env(safe-area-inset-top,0px));transform:translate(-50%,-150%);z-index:30;width:min(92%,480px);padding:12px 14px;border:1.5px solid var(--c2);background:#071a38f5;box-shadow:0 0 22px var(--c);font:13px/1.55 "Segoe UI",system-ui,sans-serif;text-align:center;transition:transform .45s}
+#toast.on{transform:translate(-50%,0)}#toast b{color:var(--gold)}
+.ov{position:fixed;inset:0;z-index:20;display:none;align-items:center;justify-content:center;flex-direction:column;background:#020816f2;text-align:center;padding:24px}
+.ov.on{display:flex}
+#lvl{cursor:pointer}
+#lvl h2{font-size:40px;margin:0;color:#fff;letter-spacing:5px;text-shadow:0 0 20px var(--c),0 0 50px var(--c);animation:zm 1.1s ease-out}
+.ov p{color:var(--c2);letter-spacing:1px;font:15px/1.6 "Segoe UI",system-ui,sans-serif}
+.ov .pn{max-width:420px;width:100%;padding:22px}
+@keyframes zm{from{transform:scale(.3);opacity:0}to{transform:scale(1);opacity:1}}
+.badge{display:inline-flex;flex-direction:column;align-items:center;justify-content:center;width:68px;height:68px;border:1.5px solid #4aa8ff44;background:#06101f;font-size:26px;margin:6px;opacity:.3;filter:grayscale(1);position:relative}
+.badge.on{opacity:1;filter:none;border-color:var(--gold);box-shadow:0 0 14px #ffc14d55}
+.badge span{font:8px Orbitron,sans-serif;color:var(--m);margin-top:2px;letter-spacing:.5px;text-align:center;padding:0 2px}
+.shop{display:flex;align-items:center;gap:10px;padding:10px 2px;border-bottom:1px solid #4aa8ff33}
+.shop .ic{font-size:24px;width:34px;text-align:center}
+.shop .nm{flex:1;font:13px/1.3 "Segoe UI",system-ui,sans-serif}.shop .nm small{display:block;color:var(--m);font-size:10px;margin-top:2px}
+.shop .pr{color:var(--gold);font-size:12px;font-weight:700;white-space:nowrap}
+.macros{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:8px}
+.macros input{width:100%;background:#06101f;border:1px solid var(--c);color:var(--t);padding:8px;font:12px "Segoe UI",sans-serif;text-align:center}
+.macros label{font-size:9px;color:var(--m);letter-spacing:1px;display:block;text-align:center;margin-bottom:3px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition-duration:.01s!important}}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<nav>
+  <button data-t="s">СТАТУС</button>
+  <button data-t="q">ЗАДАНИЯ</button>
+  <button data-t="m">ЕДА</button>
+  <button data-t="w">НЕДЕЛЯ</button>
+  <button data-t="a">БОЛЬШЕ</button>
+</nav>
+<div id="toast"></div>
+<div id="lvl" class="ov"><h2>LEVEL UP!</h2><p id="lvp"></p><p style="opacity:.6;font-size:12px">коснись, чтобы продолжить</p></div>
+<div id="ini" class="ov"><div class="pn"><div class="h2">[СИСТЕМА]</div><p style="font-size:17px;color:#fff">Вы получили квалификацию Игрока.<br>Принять?</p><button class="btn w ok" data-ini="1">ПРИНЯТЬ</button><button class="btn w" data-ini="0">ОТКАЗАТЬСЯ</button></div></div>
+<script>
+(function(){
+var K='solo_sys_v3',D=['STR','AGI','VIT','INT','SENSE'];
+var N={STR:'Сила',AGI:'Ловкость',VIT:'Живучесть',INT:'Интеллект',SENSE:'Чутьё'};
+var W=[{t:'Железная неделя',d:'Сделай 3 тренировки за неделю.',n:3},{t:'Путь бегуна',d:'3 раза выйди на бег или быструю прогулку.',n:3},{t:'Режим сна',d:'5 дней ложись до 23:00.',n:5},{t:'Чистое тело',d:'5 дней без сладкого и фастфуда.',n:5},{t:'Завтрак чемпиона',d:'Завтракай 5 дней подряд.',n:5},{t:'Цифровой детокс',d:'4 дня: соцсети не больше часа.',n:4}];
+// Достижения: id, иконка, название, описание, проверка
+var ACH=[
+ {id:'first',ic:'🌱',n:'Первый шаг',d:'Выполни первое задание',f:function(s){return Object.keys(s.done).length>=1}},
+ {id:'all_day',ic:'⭐',n:'Идеальный день',d:'Выполни все задания дня',f:function(s){return s.totalAllDay>=1}},
+ {id:'streak3',ic:'🔥',n:'3 дня подряд',d:'3 идеальных дня подряд',f:function(s){return s.bestStreak>=3}},
+ {id:'streak7',ic:'💎',n:'Неделя силы',d:'7 идеальных дней подряд',f:function(s){return s.bestStreak>=7}},
+ {id:'streak30',ic:'👑',n:'Месяц дисциплины',d:'30 идеальных дней',f:function(s){return s.totalAllDay>=30}},
+ {id:'lvl5',ic:'⚔️',n:'Слабейший охотник',d:'Достичь 5 уровня',f:function(s){return s.lvl>=5}},
+ {id:'lvl10',ic:'🛡️',n:'Упрямец',d:'Достичь 10 уровня',f:function(s){return s.lvl>=10}},
+ {id:'lvl20',ic:'🏆',n:'Повелитель',d:'Достичь 20 уровня',f:function(s){return s.lvl>=20}},
+ {id:'push100',ic:'💪',n:'Сотка',d:'1000 отжиманий всего',f:function(s){return s.totalPush>=1000}},
+ {id:'week',ic:'📅',n:'Особый агент',d:'Выполни спецзадание недели',f:function(s){return s.totalWeek>=1}},
+ {id:'meal',ic:'🍎',n:'Дневник еды',d:'Запиши 50 приёмов пищи',f:function(s){return s.totalMeals>=50}},
+ {id:'rich',ic:'💰',n:'Богач',d:'Накопи 50 золота',f:function(s){return s.gold>=50}}
+];
+var SHOP=[
+ {id:'freeze',ic:'❄️',n:'Заморозка штрафа',d:'Пропусти штраф 1 раз',p:10},
+ {id:'xp2',ic:'⚡',n:'Двойной XP',d:'Следующее задание x2 XP',p:15},
+ {id:'pts',ic:'🎯',n:'+1 очко характеристики',d:'Мгновенно +1 очко',p:25},
+ {id:'theme',ic:'🎨',n:'Золотая тема',d:'Сменить цвет интерфейса',p:50},
+ {id:'title',ic:'📜',n:'Титул «Монарх»',d:'Особый титул в профиле',p:40}
+];
+var PR='На фото еда. Определи блюда, оцени размер порций и калории. Верни только JSON без пояснений: {"items":[{"n":"название по-русски","k":калории целым числом,"p":белки,"f":жиры,"c":углеводы}]}. Если еды нет, верни {"items":[]}.';
+function fresh(){return{init:0,lvl:1,xp:0,pts:0,gold:0,st:{STR:10,AGI:10,VIT:10,INT:10,SENSE:10},hp:0,mp:0,fat:0,day:'',done:{},bonus:0,cb:0,cu:[],meals:[],goal:2000,wk:-1,wn:0,wd:'',wdone:0,pen:0,
+ ach:{},totalAllDay:0,bestStreak:0,curStreak:0,totalPush:0,totalWeek:0,totalMeals:0,
+ buffs:{freeze:0,xp2:0},theme:'blue',title:''}}
+var S=null;try{S=JSON.parse(localStorage.getItem(K))}catch(e){}
+if(!S){var old=null;try{old=JSON.parse(localStorage.getItem('solo_sys_v2'))}catch(e){}S=old?Object.assign(fresh(),old):fresh()}
+S=fresh();Object.assign(S,S);var T='s',rs=0,P=null,busy=0;
+
+function today(){var d=new Date();return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate()}
+function wk(){return Math.floor((Date.now()/864e5+3)/7)}
+function sync(){var t=today();
+ if(S.day!==t){
+  if(S.day){
+   var d=S.done,completeAll=d.p&&d.s&&d.q&&d.r;
+   if(completeAll){S.totalAllDay++;S.curStreak++;if(S.curStreak>S.bestStreak)S.bestStreak=S.curStreak}
+   else{S.curStreak=0;if(S.buffs.freeze>0){S.buffs.freeze--;S.pen=0}else{S.pen=1;S.fat=Math.min(100,S.fat+20)}}
+  }
+  S.day=t;S.done={};S.bonus=0;S.cb=0;S.meals=[]
+ }
+ if(S.wk!==wk()){S.wk=wk();S.wn=0;S.wd='';S.wdone=0}
+}
+function save(){try{localStorage.setItem(K,JSON.stringify(S))}catch(e){}}
+function need(){return 200+(S.lvl-1)*40}
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function maxHp(){return 100+S.hp*10+S.lvl*5}
+function maxMp(){return 50+S.mp*5+S.lvl*3}
+function fp(x){return x%1?x.toFixed(1):String(x)}
+function rp(b,s,c){return Math.min(c,Math.max(5,Math.round((b+(S.lvl-1)*s)/5)*5))}
+function Qs(){var km=Math.min(10,Math.max(1,Math.round((1+(S.lvl-1)*.3)*2)/2));
+ return [{id:'p',g:1,t:'Отжимания',n:rp(5,3,100),u:'',xp:20,s:'STR'},{id:'s',g:1,t:'Пресс',n:rp(10,3,100),u:'',xp:20,s:'STR'},{id:'q',g:1,t:'Приседания',n:rp(10,3,100),u:'',xp:20,s:'AGI'},{id:'r',g:1,t:'Бег или быстрая ходьба',n:km,u:' км',xp:20,s:'VIT'},
+ {id:'b',t:'Позавтракать утром',xp:10,s:'VIT'},{id:'w',t:'Выпить 2 литра воды',xp:10,s:'VIT'},{id:'z',t:'Лечь спать до 23:00',xp:10,s:'SENSE'},{id:'y',t:'Проспать 7–8 часов',xp:10,s:'SENSE'},{id:'i',t:'Читать 10 минут',xp:10,s:'INT'}].concat(S.cu)}
+function checkAch(){var unlocked=[];
+ ACH.forEach(function(a){if(!S.ach[a.id]&&a.f(S)){S.ach[a.id]=1;S.gold+=5;unlocked.push(a)}});
+ if(unlocked.length){var m='<b>[СИСТЕМА]</b> Достижение: '+unlocked.map(function(a){return a.ic+' '+a.n}).join(', ')+'<br>+'+unlocked.length*5+' золота';toast(m)}
+ return unlocked}
+var tt;function toast(h){var e=document.getElementById('toast');e.innerHTML=h;e.classList.add('on');clearTimeout(tt);tt=setTimeout(function(){e.classList.remove('on')},3500)}
+function gain(x){var up=0;S.xp+=x;while(S.xp>=need()){S.xp-=need();S.lvl++;S.pts+=5;up=1}if(up){document.getElementById('lvp').textContent='Уровень '+S.lvl+' · +5 очков характеристик. Тренировки стали тяжелее.';document.getElementById('lvl').classList.add('on')}}
+function complete(id){var a=Qs(),q=a.filter(function(x){return x.id===id})[0];if(!q||S.done[id])return;S.done[id]=1;
+ if(q.s)S.st[q.s]=+(S.st[q.s]+.5).toFixed(1);
+ if(id==='z'||id==='y')S.fat=Math.max(0,S.fat-10);
+ if(id==='p')S.totalPush+=q.n;
+ var gx=q.xp;if(S.buffs.xp2>0){gx*=2;S.buffs.xp2--}
+ gain(gx);
+ var m='<b>[СИСТЕМА]</b> Задание выполнено. +'+gx+' XP'+(q.s?', '+q.s+' +0.5':'');
+ if(a.every(function(x){return S.done[x.id]})&&!S.bonus){S.bonus=1;S.pts++;S.gold+=2;m+='<br><b>Все задания дня выполнены! +1 очко, +2 золота</b>'}
+ toast(m);checkAch()}
+function step(){var w=W[S.wk%W.length];if(S.wdone)return;if(S.wd===today()){toast('<b>[СИСТЕМА]</b> Сегодня шаг уже отмечен. Возвращайся завтра.');return}S.wn++;S.wd=today();
+ if(S.wn>=w.n){S.wdone=1;S.pts+=3;S.totalWeek++;gain(300);S.gold+=10;toast('<b>[СИСТЕМА]</b> Специальное задание выполнено!<br><b>+300 XP, +3 очка, +10 золота</b>');checkAch()}
+ else toast('<b>[СИСТЕМА]</b> Шаг засчитан: '+S.wn+'/'+w.n)}
+function spend(k){if(S.pts<1)return;S.pts--;if(k==='hp')S.hp++;else if(k==='mp')S.mp++;else S.st[k]=+(S.st[k]+1).toFixed(1)}
+function kc(){return S.meals.reduce(function(a,m){return a+m.k},0)}
+function macros(){return S.meals.reduce(function(a,m){return{a:a.a+(m.p||0),b:a.b+(m.f||0),c:a.c+(m.c||0)}},{a:0,b:0,c:0})}
+function addMeals(items,slot){items.forEach(function(i){S.meals.push({id:Date.now()+Math.random(),sl:slot,n:i.n,k:i.k,p:i.p||0,f:i.f||0,c:i.c||0})});
+ S.totalMeals+=items.length;
+ var m='<b>[СИСТЕМА]</b> Приём пищи записан.';
+ if(slot==='Завтрак'&&!S.done.b){complete('b');m+=' Задание «завтрак» выполнено.'}
+ var t=kc();if(!S.cb&&t>=S.goal*.9&&t<=S.goal*1.2){S.cb=1;S.pts+=.5;m+='<br><b>Норма калорий набрана! +0.5 очка</b>'}
+ toast(m);checkAch()}
+function shrink(f){return createImageBitmap(f).then(function(b){var s=Math.min(1,1024/Math.max(b.width,b.height)),c=document.createElement('canvas');c.width=Math.round(b.width*s);c.height=Math.round(b.height*s);c.getContext('2d').drawImage(b,0,0,c.width,c.height);return new Promise(function(r){c.toBlob(r,'image/jpeg',.82)})})}
+function scan(f){
+ if(!window.claude||!claude.use){toast('<b>[СИСТЕМА]</b> Распознавание здесь недоступно. Добавь еду вручную.');return}
+ busy=1;view();var url=URL.createObjectURL(f);
+ claude.use('sample').then(function(sm){if(!sm)throw 0;return shrink(f).then(function(bl){return sm.json(PR,{images:[bl],cache:false})})}).then(function(r){
+  var it=((r&&r.items)||[]).map(function(i){return{n:String(i.n||'Блюдо').slice(0,40),k:Math.round(+i.k)||0,p:Math.round(+i.p)||0,f:Math.round(+i.f)||0,c:Math.round(+i.c)||0}}).filter(function(i){return i.k>0});
+  busy=0;if(!it.length){toast('<b>[СИСТЕМА]</b> Еда на фото не найдена.');view();return}
+  P={items:it,img:url};view()}).catch(function(){busy=0;toast('<b>[СИСТЕМА]</b> Не удалось распознать фото.');view()})}
+function bar(c,l,v,m,x){return '<div class="bar"><div class="l"><span>'+l+'</span><span>'+Math.round(v)+' / '+m+'</span>'+(x||'')+'</div><div class="bt '+c+'"><i style="width:'+Math.min(100,v/m*100)+'%"></i></div></div>'}
+function plus(k){return S.pts>=1?'<button class="pl" data-sp="'+k+'">+</button>':''}
+
+function view(){
+ sync();var h='',L=S.lvl;
+ if(T==='s'){
+  var ti=S.title||(L>=30?'Охотник-одиночка':L>=20?'Повелитель дисциплины':L>=10?'Упрямец':L>=5?'Слабейший охотник':'Нет');
+  h='<div class="hd">STATUS</div><div class="pn"><div class="top"><div class="lv"><small>LEVEL</small>'+L+'</div><div class="who">ИМЯ: <b>Игрок</b><br>РАНГ: <span class="rank">'+'EDCBAS'.charAt(Math.min(5,Math.floor(L/10)))+'</span><br>КЛАСС: <b>'+(L>=10?'Боец':'Нет')+'</b><br>ТИТУЛ: <b>'+esc(ti)+'</b><br>ЗОЛОТО: <b style="color:var(--gold)">'+S.gold+'</b></div></div>'
+  +bar('xp','XP',S.xp,need())
+  +bar('hp','HP',maxHp(),maxHp(),plus('hp'))+bar('mp','MP',maxMp(),maxMp(),plus('mp'))+bar('ft','УСТАЛОСТЬ',S.fat,100)+'</div>'
+  +'<div class="pn"><div class="grid">'+D.map(function(k){return '<div class="stat"><span>'+k+'<em>'+N[k]+'</em></span><div style="display:flex;align-items:center"><b>'+S.st[k]+'</b>'+plus(k)+'</div></div>'}).join('')+'</div><div class="pts">Свободные очки: <b>'+fp(S.pts)+'</b></div>'+(S.pts>0&&S.pts<1?'<div class="pts m">Нужно набрать целое очко, чтобы вложить его.</div>':'')+'</div>'
+  +'<div class="pn p"><div class="h2">[ДОСТИЖЕНИЯ] '+Object.keys(S.ach).length+' / '+ACH.length+'</div><div style="display:flex;flex-wrap:wrap;justify-content:center">'
+  +ACH.map(function(a){var on=S.ach[a.id];return '<div class="badge'+(on?' on':'')+'" title="'+esc(a.d)+'">'+a.ic+'<span>'+esc(a.n)+'</span></div>'}).join('')+'</div></div>'
+  +'<button class="rst" data-rs="1">'+(rs?'НАЖМИ ЕЩЁ РАЗ — ВСЁ БУДЕТ СБРОШЕНО':'сбросить прогресс')+'</button>';
+ }else if(T==='q'){
+  var a=Qs(),c=a.filter(function(x){return S.done[x.id]}).length;
+  function row(q){var d=S.done[q.id];return '<div class="q'+(d?' d':'')+'"><button class="ck" data-q="'+q.id+'">✓</button><div class="tx">'+esc(q.t)+(q.g?' ['+(d?q.n:0)+'/'+q.n+q.u+']':'')+'<small>+'+q.xp+' XP'+(q.s?' · '+q.s+' +0.5':'')+'</small></div>'+(q.id.charAt(0)==='c'?'<button class="rm" data-rm="'+q.id+'">×</button>':'')+'</div>'}
+  h='<div class="hd">DAILY QUEST</div>'+(S.pen?'<div class="pn r"><div class="h2" style="color:var(--red)">[ШТРАФ]</div><div class="cau">Вчера тренировка не выполнена. Усталость +20. Сегодня наверстай.</div></div>':'')
+  +(S.curStreak>0?'<div class="pn g" style="padding:8px;text-align:center"><div style="font-size:14px">🔥 Серия: <b>'+S.curStreak+'</b> дн. · Рекорд: <b>'+S.bestStreak+'</b></div></div>':'')
+  +'<div class="pn"><div class="ttl">Подготовка к становлению сильным · '+c+'/'+a.length+'</div><div class="sub">ТРЕНИРОВКА</div>'+a.filter(function(x){return x.g}).map(row).join('')+'<div class="sub">РЕЖИМ И ДИСЦИПЛИНА</div>'+a.filter(function(x){return !x.g}).map(row).join('')
+  +'<div class="add"><input id="ni" maxlength="40" placeholder="Своё задание…"><button class="btn" data-add="1">ДОБАВИТЬ</button></div></div>'
+  +'<div class="pn r"><div class="cau">ВНИМАНИЕ: если ежедневное задание не выполнено, будет назначен штраф.</div></div>'
+  +'<div class="pts m">Каждый новый уровень делает тренировку тяжелее. Выполни всё за день — бонусное очко'+(S.bonus?' ✓':'')+'</div>';
+ }else if(T==='m'){
+  var t=kc(),mm=macros(),hr=new Date().getHours(),ds=hr<11?'Завтрак':hr<16?'Обед':hr<21?'Ужин':'Перекус';
+  var sel='<select class="sel" id="sl" style="margin-bottom:8px">'+['Завтрак','Обед','Ужин','Перекус'].map(function(x){return '<option'+(x===ds?' selected':'')+'>'+x+'</option>'}).join('')+'</select>';
+  h='<div class="hd">MEALS</div><div class="pn"><div class="h2">КАЛОРИИ СЕГОДНЯ</div>'+bar('kc','ККАЛ',t,S.goal)
+  +'<div class="macros"><div><label>БЕЛКИ</label><input type="number" id="gp" value="'+(S.goalP||120)+'" placeholder="г"></div><div><label>ЖИРЫ</label><input type="number" id="gf" value="'+(S.goalF||70)+'" placeholder="г"></div><div><label>УГЛЕВОДЫ</label><input type="number" id="gc" value="'+(S.goalC||250)+'" placeholder="г"></div></div>'
+  +'<div style="margin-top:10px;font:12px \'Segoe UI\',sans-serif;color:var(--m)">Съедено: Б '+Math.round(mm.a)+'г · Ж '+Math.round(mm.b)+'г · У '+Math.round(mm.c)+'г</div>'
+  +'<div class="pts">'+(S.cb?'Норма набрана ✓ (+0.5 очка)':'Набери '+Math.round(S.goal*.9)+'–'+Math.round(S.goal*1.2)+' ккал — получишь +0.5 очка')+'</div>'
+  +'<div class="add"><input id="gl" type="number" inputmode="numeric" value="'+S.goal+'" placeholder="Норма ккал"><span style="align-self:center;font-size:11px;color:var(--m)">норма</span></div></div>'
+  +'<div class="pn">'+(P?'<img class="pv" src="'+P.img+'" alt="">'+P.items.map(function(i){return '<div class="ml"><span>'+esc(i.n)+'<br><small>Б '+i.p+' · Ж '+i.f+' · У '+i.c+'</small></span><b>'+i.k+' ккал</b></div>'}).join('')+'<div class="pts">Итого: '+P.items.reduce(function(a,i){return a+i.k},0)+' ккал</div>'+sel+'<button class="btn w ok" data-pa="1">ДОБАВИТЬ В ДНЕВНИК</button><button class="btn w" data-pc="1">ОТМЕНА</button>'
+   :'<div class="h2">СФОТОГРАФИРУЙ ЕДУ</div><label class="btn w ok" style="cursor:pointer">'+(busy?'АНАЛИЗ…':'📷 СДЕЛАТЬ ФОТО')+'<input type="file" id="ph" accept="image/*" capture="environment" hidden'+(busy?' disabled':'')+'></label><div class="nt">Система определит блюдо, калории и БЖУ.</div>')+'</div>'
+  +'<div class="pn"><div class="h2">ДНЕВНИК ПИТАНИЯ ('+S.meals.length+')</div>'+(S.meals.length?S.meals.map(function(m){return '<div class="ml"><span><small>'+m.sl+'</small><br>'+esc(m.n)+'</span><span><b>'+m.k+'</b> <button class="rm" data-dm="'+m.id+'">×</button></span></div>'}).join(''):'<div class="nt">Пока пусто.</div>')
+  +'<div class="add"><input id="mn" maxlength="40" placeholder="Блюдо"><input id="mk" type="number" inputmode="numeric" placeholder="ккал" style="max-width:80px"></div>'
+  +'<div class="macros"><div><label>Б</label><input type="number" id="mp" placeholder="г" value="0"></div><div><label>Ж</label><input type="number" id="mf" placeholder="г" value="0"></div><div><label>У</label><input type="number" id="mc" placeholder="г" value="0"></div></div>'
+  +'<button class="btn w" data-ma="1">ДОБАВИТЬ ВРУЧНУЮ</button></div>';
+ }else if(T==='w'){
+  var w=W[S.wk%W.length],dots='';for(var i=0;i<w.n;i++)dots+='<i class="'+(i<S.wn?'on':'')+'"></i>';
+  h='<div class="hd">SPECIAL QUEST</div><div class="pn g"><div class="h2">СПЕЦИАЛЬНОЕ ЗАДАНИЕ · РАЗ В НЕДЕЛЮ</div><div class="wt">'+w.t+'</div><div class="wd">'+w.d+'</div><div class="dots">'+dots+'</div><div class="pts">Награда: 300 XP + 3 очка + 10 золота</div>'
+  +'<button class="btn w gb" data-step="1"'+(S.wdone?' disabled':'')+'>'+(S.wdone?'ВЫПОЛНЕНО ✓':'ОТМЕТИТЬ СЕГОДНЯ ('+S.wn+'/'+w.n+')')+'</button></div><div class="pts m">Новое задание появится в понедельник. Один шаг в день.</div>';
+ }else{
+  // Настройки, магазин, экспорт
+  h='<div class="hd">SYSTEM</div>'
+  +'<div class="pn p"><div class="h2">[МАГАЗИН] ЗОЛОТО: '+S.gold+'</div>'
+  +SHOP.map(function(it){var dis=S.gold<it.p;return '<div class="shop"><div class="ic">'+it.ic+'</div><div class="nm">'+it.n+'<small>'+it.d+'</small></div><div class="pr">'+it.p+'💰</div><button class="btn'+(dis?'':' ok')+'" data-buy="'+it.id+'"'+(dis?' disabled':'')+' style="padding:8px 12px;font-size:10px">КУПИТЬ</button></div>'}).join('')
+  +'</div>'
+  +'<div class="pn"><div class="h2">[ДАННЫЕ]</div>'
+  +'<button class="btn w" data-exp="1">📥 ЭКСПОРТ (JSON)</button>'
+  +'<label class="btn w" style="cursor:pointer;margin-top:10px">📤 ИМПОРТ (JSON)<input type="file" id="imp" accept="application/json" hidden></label>'
+  +'<div class="nt">Экспорт сохранит весь прогресс в файл. Импорт восстановит его.</div></div>'
+  +'<div class="pn"><div class="h2">[УСТАНОВКА]</div>'
+  +'<button class="btn w ok" id="installBtn" style="display:none">📱 УСТАНОВИТЬ ПРИЛОЖЕНИЕ</button>'
+  +'<div class="nt">Открой этот сайт в Chrome или Safari и добавь на главный экран — будет работать как приложение и офлайн.</div></div>'
+  +'<div class="pn"><div class="h2">[СТАТИСТИКА]</div>'
+  +'<div class="ml"><span>Идеальных дней</span><b>'+S.totalAllDay+'</b></div>'
+  +'<div class="ml"><span>Лучшая серия</span><b>'+S.bestStreak+'</b></div>'
+  +'<div class="ml"><span>Отжиманий всего</span><b>'+S.totalPush+'</b></div>'
+  +'<div class="ml"><span>Приёмов пищи</span><b>'+S.totalMeals+'</b></div>'
+  +'<div class="ml"><span>Спецзаданий</span><b>'+S.totalWeek+'</b></div></div>';
+ }
+ document.getElementById('app').innerHTML=h;
+ document.getElementById('ini').classList.toggle('on',!S.init);
+ document.querySelectorAll('nav button').forEach(function(b){b.classList.toggle('on',b.dataset.t===T)});
+ requestAnimationFrame(function(){document.querySelectorAll('.bt i').forEach(function(i){var w=i.style.width;i.style.width='0';requestAnimationFrame(function(){i.style.width=w})})});
+ save();
+}
+
+function buy(id){var it=SHOP.filter(function(x){return x.id===id})[0];if(!it||S.gold<it.p)return;S.gold-=it.p;
+ if(id==='freeze'){S.buffs.freeze++;toast('<b>[СИСТЕМА]</b> Заморозка активирована. Штраф будет пропущен 1 раз.')}
+ else if(id==='xp2'){S.buffs.xp2++;toast('<b>[СИСТЕМА]</b> Следующее задание даст двойной XP!')}
+ else if(id==='pts'){S.pts++;toast('<b>[СИСТЕМА]</b> +1 очко характеристики.')}
+ else if(id==='theme'){S.theme='gold';document.documentElement.style.setProperty('--c','#ffc14d');document.documentElement.style.setProperty('--c2','#ffe6a9');toast('<b>[СИСТЕМА]</b> Золотая тема активирована!')}
+ else if(id==='title'){S.title='Монарх';toast('<b>[СИСТЕМА]</b> Титул «Монарх» получен.')}
+ checkAch()}
+
+function exportData(){var blob=new Blob([JSON.stringify(S,null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='solo-system-backup-'+today()+'.json';a.click();toast('<b>[СИСТЕМА]</b> Прогресс экспортирован.')}
+function importData(f){var r=new FileReader();r.onload=function(){try{var d=JSON.parse(r.result);S=Object.assign(fresh(),d);save();toast('<b>[СИСТЕМА]</b> Прогресс восстановлен.');view()}catch(e){toast('<b>[СИСТЕМА]</b> Ошибка импорта файла.')}};r.readAsText(f)}
+
+document.addEventListener('click',function(e){var b=e.target.closest('[data-t],[data-sp],[data-q],[data-rm],[data-add],[data-step],[data-rs],[data-ini],[data-pa],[data-pc],[data-ma],[data-dm],[data-buy],[data-exp]');if(!b)return;var d=b.dataset;
+ if(d.t){T=d.t;rs=0}
+ else if(d.ini!==undefined){if(d.ini==='1'){S.init=1;toast('<b>[СИСТЕМА]</b> Игрок зарегистрирован. Добро пожаловать.')}else toast('<b>[СИСТЕМА]</b> Квалификация сохранена.')}
+ else if(d.sp)spend(d.sp);
+ else if(d.q)complete(d.q);
+ else if(d.rm){S.cu=S.cu.filter(function(x){return x.id!==d.rm})}
+ else if(d.add){var i=document.getElementById('ni'),v=i.value.trim();if(!v)return;S.cu.push({id:'c'+Date.now(),t:v,xp:10,s:''})}
+ else if(d.step)step();
+ else if(d.pa){addMeals(P.items,document.getElementById('sl').value);P=null}
+ else if(d.pc){P=null}
+ else if(d.ma){var n=document.getElementById('mn').value.trim(),k=Math.round(+document.getElementById('mk').value);if(!n||!(k>0)){toast('<b>[СИСТЕМА]</b> Введи название и калории.');return}
+  addMeals([{n:n,k:k,p:Math.round(+document.getElementById('mp').value)||0,f:Math.round(+document.getElementById('mf').value)||0,c:Math.round(+document.getElementById('mc').value)||0}],'Перекус')}
+ else if(d.dm){S.meals=S.meals.filter(function(m){return String(m.id)!==d.dm})}
+ else if(d.buy)buy(d.buy);
+ else if(d.exp)exportData();
+ else if(d.rs){if(!rs){rs=1}else{try{localStorage.removeItem(K)}catch(x){}S=fresh();rs=0}}
+ view()});
+document.addEventListener('change',function(e){if(e.target.id==='ph'&&e.target.files[0])scan(e.target.files[0]);
+ if(e.target.id==='gl'){var g=Math.round(+e.target.value);if(g>=800&&g<=6000){S.goal=g;view()}}
+ if(e.target.id==='gp'){var p=Math.round(+e.target.value);if(p>=0)S.goalP=p}
+ if(e.target.id==='gf'){var f=Math.round(+e.target.value);if(f>=0)S.goalF=f}
+ if(e.target.id==='gc'){var c=Math.round(+e.target.value);if(c>=0)S.goalC=c}
+ if(e.target.id==='imp'&&e.target.files[0])importData(e.target.files[0])});
+document.getElementById('lvl').addEventListener('click',function(){this.classList.remove('on')});
+// PWA install
+var deferredPrompt;window.addEventListener('beforeinstallprompt',function(e){e.preventDefault();deferredPrompt=e;var btn=document.getElementById('installBtn');if(btn)btn.style.display='block'});
+document.addEventListener('click',function(e){if(e.target.id==='installBtn'&&deferredPrompt){deferredPrompt.prompt();deferredPrompt.userChoice.then(function(){deferredPrompt=null})}});
+// reg SW
+if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(function(){})}
+view();checkAch();
+})();
+</script>
+</body>
+</html>
